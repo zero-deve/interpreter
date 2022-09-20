@@ -1,0 +1,48 @@
+{
+	"TokenList": {
+		"Tokens": [
+			{
+				"Character": "<",
+				"Type": "operator"
+			},
+			{
+				"Character": ">",
+				"Type": "operator"
+			},
+			{
+				"Character": "/>",
+				"Type": "operator"
+			},
+			{
+				"Character": "</",
+				"Type": "operator"
+			},
+			{
+				"Character": "=",
+				"Type": "operator"
+			},
+			{
+				"Character": "{",
+				"Type": "operator"
+			},
+			{
+				"Character": "}",
+				"Type": "operator"
+			},
+			{
+				"Character": ":",
+				"Type": "operator"
+			},
+			{
+				"Type": "string",
+				"Delimiter": "'"
+			},
+			{
+				"Type": "identifier"
+			},
+			{
+				"Type": "number"
+			}
+		]
+	}
+}
