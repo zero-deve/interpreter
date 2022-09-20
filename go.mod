@@ -1,3 +1,3 @@
-module zero-deve/interpreter
+module github.com/zero-deve/interpreter
 
 go 1.18
