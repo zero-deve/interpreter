@@ -34,14 +34,27 @@
 				"Type": "operator"
 			},
 			{
+				"Character": ",",
+				"Type": "operator"
+			},
+			{
 				"Type": "string",
-				"Delimiter": "'"
+				"IsStringLike": true,
+				"Openning": "\""
 			},
 			{
-				"Type": "identifier"
+				"Character": "^([aA-zZ])+$",
+				"Type": "identifier",
+				"IsRegEx": true
 			},
 			{
-				"Type": "number"
+				"Character": "^([0-9])+$",
+				"Type": "number",
+				"IsRegEx": true
+			},
+			{
+				"Character": " ",
+				"IsUseless": true
 			}
 		]
 	}

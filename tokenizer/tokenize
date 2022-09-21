@@ -1,23 +1,23 @@
 # tokenizer tokenize
 
-input:
-	+ str
+# token reader
 
-initial state:
-	+ possible tokens = all tokens
-	+ token = character empty, no type
+has:
+	+ reading index
+	+ string
+	+ possible tokens (all tokens at the beginning)
+	+ token
 
-+ read character
-+ find possible tokens in prev possible tokens
-+ more than one possible tokens?
-	+ update possible tokens
-	+ continue
-+ only one possible token?
-	+ update possible tokens
-	+ do they match perfectly?
-		+ token found
-	+ else
-		+ continue
-+ no possible tokens?
-	+ unknown token
-	+ reset state
+## read token
+
++ new token = prev token
++ new token character += current character
++ find new possible tokens
++ no new possible tokens?
+	+ any prev possible token does match perfectly?
+		+ token found (prev token)
+	+ no one?
+		+ unknown token (new token)
++ new ones?
+	+ increase reading index
+	+ prev possible tokens = new possible tokens

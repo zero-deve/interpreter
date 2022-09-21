@@ -5,8 +5,8 @@ import (
 )
 
 func Test_Tokenizer_IdentifyTokens(t *testing.T) {
-	tokenizer := Tokenizer{}
-	tokenList, err := tokenizer.Tokenize("<Game><WindowInfo title='Window title' size={{x: 500, y: 800}} /></Game>")
+	tokenizer := LoadTokenizer("../tests/tokenizer.json")
+	tokenList, err := tokenizer.Tokenize(`<Game><WindowInfo title="Window title" size={{x: 500, y: 800}} /></Game>`)
 
 	if err != nil {
 		t.Fatal(err)
@@ -15,109 +15,120 @@ func Test_Tokenizer_IdentifyTokens(t *testing.T) {
 	expectedTokenList := TokenList{
 		Tokens: []Token{
 			{
-				Character: "<",
-				Type:      "operator",
+				Value: "<",
+				Type:  "operator",
 			},
 			{
-				Character: "Game",
-				Type:      "identifier",
+				Value: "Game",
+				Type:  "identifier",
 			},
 			{
-				Character: ">",
-				Type:      "operator",
+				Value: ">",
+				Type:  "operator",
 			},
 			{
-				Character: "<",
-				Type:      "operator",
+				Value: "<",
+				Type:  "operator",
 			},
 			{
-				Character: "WindowInfo",
-				Type:      "identifier",
+				Value: "WindowInfo",
+				Type:  "identifier",
 			},
 			{
-				Character: "title",
-				Type:      "identifier",
+				Value: "title",
+				Type:  "identifier",
 			},
 			{
-				Character: "=",
-				Type:      "operator",
+				Value: "=",
+				Type:  "operator",
 			},
 			{
-				Character: "Window title",
-				Type:      "string",
+				Value: "Window title",
+				Type:  "string",
 			},
 			{
-				Character: "size",
-				Type:      "identifier",
+				Value: "size",
+				Type:  "identifier",
 			},
 			{
-				Character: "=",
-				Type:      "operator",
+				Value: "=",
+				Type:  "operator",
 			},
 			{
-				Character: "{",
-				Type:      "operator",
+				Value: "{",
+				Type:  "operator",
 			},
 			{
-				Character: "{",
-				Type:      "operator",
+				Value: "{",
+				Type:  "operator",
 			},
 			{
-				Character: "x",
-				Type:      "identifier",
+				Value: "x",
+				Type:  "identifier",
 			},
 			{
-				Character: ":",
-				Type:      "operator",
+				Value: ":",
+				Type:  "operator",
 			},
 			{
-				Character: "500",
-				Type:      "number",
+				Value: "500",
+				Type:  "number",
 			},
 			{
-				Character: ",",
-				Type:      "operator",
+				Value: ",",
+				Type:  "operator",
 			},
 			{
-				Character: "y",
-				Type:      "identifier",
+				Value: "y",
+				Type:  "identifier",
 			},
 			{
-				Character: ":",
-				Type:      "operator",
+				Value: ":",
+				Type:  "operator",
 			},
 			{
-				Character: "800",
-				Type:      "number",
+				Value: "800",
+				Type:  "number",
 			},
 			{
-				Character: "}",
-				Type:      "operator",
+				Value: "}",
+				Type:  "operator",
 			},
 			{
-				Character: "}",
-				Type:      "operator",
+				Value: "}",
+				Type:  "operator",
 			},
 			{
-				Character: "/>",
-				Type:      "operator",
+				Value: "/>",
+				Type:  "operator",
 			},
 			{
-				Character: "</",
-				Type:      "operator",
+				Value: "</",
+				Type:  "operator",
 			},
 			{
-				Character: "Game",
-				Type:      "identifier",
+				Value: "Game",
+				Type:  "identifier",
 			},
 			{
-				Character: ">",
-				Type:      "operator",
+				Value: ">",
+				Type:  "operator",
 			},
 		},
 	}
 
-	if !expectedTokenList.Equals(tokenList) {
-		t.Fatal("Generated token list differs")
+	if !expectedTokenList.HasSameValue(tokenList) {
+		t.Log("Generated token list differs")
+		t.Log("Generated========================")
+		printTokenList(tokenList, t)
+		t.Log("Expected========================")
+		printTokenList(expectedTokenList, t)
+		t.FailNow()
+	}
+}
+
+func printTokenList(tokenList TokenList, t *testing.T) {
+	for _, token := range tokenList.Tokens {
+		t.Logf("%s %s\n", token.Type, token.Value)
 	}
 }
